@@ -1,5 +1,5 @@
 {
-  "name": "OpenShift-Sample-App",
+  "name": "Bitstamp",
   "version": "1.0.0",
   "description": "OpenShift Sample Application",
   "keywords": [
@@ -25,7 +25,10 @@
   },
 
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~3.4.4",
+    "cheerio":"",
+    "pusher":"",
+    "pusher-client":""
   },
   "devDependencies": {},
   "bundleDependencies": [],

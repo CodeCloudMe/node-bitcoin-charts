@@ -3,6 +3,9 @@
 var express = require('express');
 var fs      = require('fs');
 
+var pusher = require('pusher-client');
+
+
 
 /**
  *  Define the sample application.
@@ -104,6 +107,37 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+
+
+         self.routes['/prices'] = function(req, res) {
+                
+                res.setHeader('Content-Type', 'text/html');
+        
+
+
+
+                var p= new pusher('de504dc5763aeef9ff52');
+               var trades_channel = p.subscribe('live_trades');
+               
+
+                console.log('running... waiting for trade');
+                trades_channel.bind('trade', function(data) {
+                    
+                   
+                        var id = data['id'];
+                        var amount = data['amount'];
+                        var price = data['price'];
+
+                        console.log(price);
+                  
+                 });
+
+
+
+
+        };
+
+
     };
 
 
@@ -153,6 +187,8 @@ var SampleApp = function() {
 /**
  *  main():  Main code.
  */
+
+
 var zapp = new SampleApp();
 zapp.initialize();
 zapp.start();
