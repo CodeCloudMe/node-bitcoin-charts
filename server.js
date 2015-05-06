@@ -1,9 +1,36 @@
 #!/bin/env node
 //  OpenShift sample Node application
+
+
+
+
+
 var express = require('express');
 var fs      = require('fs');
 
 var pusher = require('pusher-client');
+var MongoClient = require('mongodb').MongoClient;
+
+
+var connection_string = '127.0.0.1:27017/prices';
+// if OPENSHIFT env variables are present, use the available connection info:
+if( process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+  connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+  process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+  process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+  process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+  process.env.OPENSHIFT_APP_NAME;
+}
+
+var globalDB;
+
+MongoClient.connect('mongodb://'+connection_string, function(err, db) {
+
+   
+    globalDB=db;
+    
+
+})
 
 
 
@@ -117,7 +144,7 @@ var SampleApp = function() {
 
 
                 var p= new pusher('de504dc5763aeef9ff52');
-               var trades_channel = p.subscribe('live_trades');
+                var trades_channel = p.subscribe('live_trades');
                
 
                 console.log('running... waiting for trade');
@@ -129,6 +156,21 @@ var SampleApp = function() {
                         var price = data['price'];
 
                         console.log(price);
+
+                        var values = {'amount':amount, 'price':price};
+                       
+                        globalDB.collection('bitstamp').insert( values ,function(err, records){
+                                 if(err) { 
+                                    console.log('write error: '+err);
+                                
+                                  }
+
+
+                              //console.log(saveArr);
+                                console.log('data saved');
+
+
+                        })
                   
                  });
 

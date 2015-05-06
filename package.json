@@ -28,7 +28,8 @@
     "express": "~3.4.4",
     "cheerio":"",
     "pusher":"",
-    "pusher-client":""
+    "pusher-client":"",
+    "mongodb":""
   },
   "devDependencies": {},
   "bundleDependencies": [],
