@@ -143,8 +143,10 @@ var SampleApp = function() {
             coll.find({'timestamp':{'$gt':0}}, 
                 function(err, data){
 
-                    var respData = JSON.stringify(data);
-                     res.send(respData);
+                   // var respData = JSON.stringify(data);
+                    console.log(data);
+                    console.log('finishing');
+                     res.send(data);
 
                 });
            
