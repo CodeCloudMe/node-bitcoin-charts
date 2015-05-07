@@ -154,10 +154,22 @@ var SampleApp = function() {
                         var id = data['id'];
                         var amount = data['amount'];
                         var price = data['price'];
+                        var timestamp = new Date().getTime();
+                        var ask = data['ask'];
+                        var bid = data['bid'];
+                        var high = data['high'];
+                        var low = data['low'];
+                        var volume = data['volume'];
+
+
+
+
 
                         console.log(price);
 
-                        var values = {'amount':amount, 'price':price};
+                        var values = {'amount':amount, 'price':price, 'ask':ask, 'bid':bid, 'timestamp':timestamp, 'high':high, 'low':low};
+
+                        console.log(values);
                        
                         globalDB.collection('bitstamp').insert( values ,function(err, records){
                                  if(err) { 
