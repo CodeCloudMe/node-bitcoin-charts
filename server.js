@@ -135,6 +135,22 @@ var SampleApp = function() {
             res.send(self.cache_get('index.html') );
         };
 
+        self.routes['/getLatest'] = function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+           
+            var coll = globalDB.collection('bitstamp');
+
+            coll.find({'timestamp':{'$gt':0}}, 
+                function(err, data){
+
+                    var respData = JSON.stringify(data);
+                     res.send(respData);
+
+                });
+           
+        };
+
+
 
          self.routes['/prices'] = function(req, res) {
                 
@@ -155,11 +171,11 @@ var SampleApp = function() {
                         var amount = data['amount'];
                         var price = data['price'];
                         var timestamp = new Date().getTime();
-                        var ask = data['ask'];
-                        var bid = data['bid'];
-                        var high = data['high'];
-                        var low = data['low'];
-                        var volume = data['volume'];
+                       // var ask = data['ask'];
+                       // var bid = data['bid'];
+                       // var high = data['high'];
+                       // var low = data['low'];
+                       // var volume = data['volume'];
 
 
 
@@ -167,7 +183,7 @@ var SampleApp = function() {
 
                         console.log(price);
 
-                        var values = {'amount':amount, 'price':price, 'ask':ask, 'bid':bid, 'timestamp':timestamp, 'high':high, 'low':low};
+                        var values = {'amount':amount, 'price':price, 'timestamp':timestamp};
 
                         console.log(values);
                        
