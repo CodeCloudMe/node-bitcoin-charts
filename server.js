@@ -140,7 +140,7 @@ var SampleApp = function() {
            
             var coll = globalDB.collection('bitstamp');
 
-            coll.find({'timestamp':{'$gt':0}}, 
+            coll.find({'timestamp':{'$gt':0}}).toArray( 
                 function(err, data){
 
                    // var respData = JSON.stringify(data);
