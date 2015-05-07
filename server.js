@@ -136,11 +136,9 @@ var SampleApp = function() {
         };
 
         self.routes['/getLatest'] = function(req, res) {
-            res.setHeader('Content-Type', 'application/json');
+           // res.setHeader('Content-Type', 'application/json');
            
-            var coll = globalDB.collection('bitstamp');
-
-            coll.find({'timestamp':{'$gt':0}}).toArray( 
+            globalDB.collection('bitstamp').find({'timestamp':{'$gt':0}}).toArray( 
                 function(err, data){
 
                    // var respData = JSON.stringify(data);
