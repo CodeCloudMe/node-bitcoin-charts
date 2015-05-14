@@ -12,24 +12,24 @@
 
 		$(document).ready(function(){
 
-			
-			getAllData();
+			doNextExchange();
+			//getAllData();
 			//makeChart();
 		})
 
 
-		function getAllData(){
+		var allData=[];
+		var exchanges = ['btcchina', 'bter'];
+		var currentExchange = 0;
 
-			var exchanges = ['btcchina', 'bter'];
+		
 
-			for(k in exchanges){
 
-				getData(btcchina)
-			}
 
+		function doNextExchange(){
+
+			getData(exchanges[currentExchange]);
 		}
-
-
 
 
 
@@ -38,8 +38,9 @@
 
 			$.ajax({
 
-				url:'http://bitstamp-searchgag.rhcloud.com/getAllData?exchange='+exchange,
-				data: 
+				url:'http://bitstamp-searchgag.rhcloud.com/getAllData',
+				data: {'exchange':exchange},
+				
 				complete:function(transport){
 
 					var resp = transport.responseText;
@@ -55,6 +56,20 @@
 						chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
 
 					}
+
+					allData.push({'name':exchange, 'data':chartData})
+
+
+					currentExchange= currentExchange+1;
+					if((currentExchange +1) == exchanges.length){
+
+						makeChart(allData)
+
+					}
+					else{
+							doNextExchange();
+					}
+				
 
 					//makeChart(chartData);
 
@@ -101,12 +116,7 @@
 			                }
 			            }
 			        },
-			        series: [{
-			            name: 'Bitstamp',
-
-			            data: data1
-
-			        }]
+			        series: data1
 			    });
 		}
 
