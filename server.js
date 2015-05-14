@@ -180,6 +180,29 @@ var SampleApp = function() {
 
                            } 
 
+
+                           if(exchange == "bitstamp"){
+                                
+                                for(i in data){
+
+                                    data[i]['buy']= data[i]['bid'];
+                                }
+
+
+
+                           } 
+
+                           if(exchange == "bitfinex"){
+                                
+                                for(i in data){
+
+                                    data[i]['buy']= data[i]['bid'];
+                                }
+
+
+
+                           } 
+
                            if(exchange =="btcchina"){
 
 
@@ -191,6 +214,19 @@ var SampleApp = function() {
                                 }
 
                            }
+
+                            if(exchange =="okcoin"){
+
+
+                                  for(i in data){
+                                    var time1 = data[i]['timestamp'];
+                                    data[i]= data[i]['ticker'];
+                                    data[i]['timestamp']= time1;
+
+                                }
+
+                           }
+                           
                             if(exchange =="btc"){
                                  for(i in data){
                                      var time1 = data[i]['timestamp'];

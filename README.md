@@ -1,3 +1,3 @@
-The OpenShift `nodejs` cartridge documentation can be found at:
+Sample:
 
-http://openshift.github.io/documentation/oo_cartridge_guide.html#nodejs
+http://bitstamp-searchgag.rhcloud.com/
