@@ -173,8 +173,9 @@ var SampleApp = function() {
 
             var saveData = function(collectionName, data){
 
-                console.log('saving into ' + collectionName + 'the followin \n \n '+data);
 
+                console.log('saving into ' + collectionName + 'the followin \n \n '+data);
+                 data = JSON.parse(data);
                  globalDB.collection(collectionName).insert(data);
 
 
