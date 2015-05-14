@@ -184,7 +184,7 @@ var SampleApp = function() {
                            if(exchange == "bitstamp"){
                                 
                                 for(i in data){
-                                    if(data[i]['bid'] ==null){
+                                    if(data[i]['timestamp'] < 1431609109625){
 
                                         data.splice(i, 1);
                                     }
