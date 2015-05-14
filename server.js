@@ -215,6 +215,11 @@ var SampleApp = function() {
 
                 console.log('saving into ' + collectionName + 'the followin \n \n '+data);
                  data = JSON.parse(data);
+
+                 var timestamp = new Date().getTime(); 
+                 data["timestamp"] = timestamp;
+
+
                  globalDB.collection(collectionName).insert(data);
 
 
@@ -239,11 +244,11 @@ var SampleApp = function() {
                if(i ==0){
 
                 baseCommand = 'rp("'+theUrl+'")';
-                addOnCommand = '.then(function(data){  var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})';
+                addOnCommand = '.then(function(data){ saveData("'+collectn+'", data)})';
                }
 
                else{
-                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){ var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})})'
+                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){  saveData("'+collectn+'", data)})})'
                }
 
                 baseCommand = baseCommand + addOnCommand;
