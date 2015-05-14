@@ -52,7 +52,7 @@
 					chartData=[];
 
 					for(i in info){
-						if(typeof chartData[i]['timestamp'] != "undefined"){
+						if(typeof info[i]['timestamp'] != "undefined"){
 							chartData[i]= [info[i]['timestamp'],info[i]['last'] ];
 						}
 
@@ -62,7 +62,7 @@
 
 
 					currentExchange= currentExchange+1;
-					if((currentExchange +1) == exchanges.length){
+					if((currentExchange +1) > exchanges.length){
 
 						makeChart(allData)
 
