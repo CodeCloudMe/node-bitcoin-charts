@@ -154,6 +154,45 @@ var SampleApp = function() {
 
 
 
+        self.routes['/getAllData'] = function(req, res){
+
+            if(!req.query.exchange){
+                res.send('{"status":"fail", "reason":"send exchange"}');
+
+                return false;
+            }
+           var  exchange = req.query.exchange;
+
+            
+
+                 globalDB.collection(exchange).find.toArray( 
+                    function(err, data){
+
+
+                           if(exchange == "bter" || exchange == "btcchina"){
+
+                                
+                                for(i in data){
+
+                                    data[i]['price']= data[i]['last'];
+                                }
+
+
+
+
+                           } 
+
+
+                             console.log(data);
+                             console.log('finishing');
+                             res.send(data);
+                             return true;
+
+
+                    });
+         
+            
+        }
 
         self.routes['/getAllPrices'] = function(req, res) {
 
@@ -200,11 +239,11 @@ var SampleApp = function() {
                if(i ==0){
 
                 baseCommand = 'rp("'+theUrl+'")';
-                addOnCommand = '.then(function(data){saveData("'+collectn+'", data)})';
+                addOnCommand = '.then(function(data){ tm =   var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})';
                }
 
                else{
-                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){saveData("'+collectn+'", data)})})'
+                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){ var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})})'
                }
 
                 baseCommand = baseCommand + addOnCommand;

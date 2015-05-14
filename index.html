@@ -17,11 +17,18 @@
 			//makeChart();
 		})
 
+
+		
+
+
+
+
 		function getData(){
 
 			$.ajax({
 
-				url:'http://bitstamp-searchgag.rhcloud.com/getLatest',
+				url:'http://bitstamp-searchgag.rhcloud.com/getAllData',
+
 				complete:function(transport){
 
 					var resp = transport.responseText;
@@ -30,15 +37,38 @@
 
 					//empty array we are going to make into something we can send to highcharts
 
-					chartData=[];
+					highChartData=[];
 
 					for(i in info){
 
-						chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
+						var thisExchangeData = info[i];
+
+						thisExchangesArray=[];
+						for(j in thisExchangeData){
+
+							var newInfo = [info[i]['timestamp'],info[i]['price'];
+							thisExchangesArray.push(newInfo);
+
+						}
+
+						highChartData.push({'name': i, 'data':thisExchangesArray })
+						//chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
 
 					}
 
-					makeChart(chartData);
+					/*
+					[{
+			            name: 'Bitstamp',
+
+			            data: data1
+
+			        }]
+					*/
+
+
+					console.log(highChartData);
+
+					makeChart(highChartData);
 
 
 
@@ -83,12 +113,7 @@
 			                }
 			            }
 			        },
-			        series: [{
-			            name: 'Bitstamp',
-
-			            data: data1
-
-			        }]
+			        series: data1
 			    });
 		}
 
