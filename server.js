@@ -186,15 +186,16 @@ var SampleApp = function() {
                                   for(i in data){
                                     var time1 = data[i]['timestamp'];
                                     data[i]= data[i]['ticker'];
-                                    data.push({'timestamp', time1});
+                                    data.push({'timestamp': time1});
 
                                 }
 
                            }
                             if(exchange =="btc"){
                                  for(i in data){
-
+                                     var time1 = data[i]['timestamp'];
                                     data[i]= data[i]['btc_usd'];
+                                    data.push({'timestamp': time1});
                                 }
 
                            }
