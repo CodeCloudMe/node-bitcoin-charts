@@ -165,7 +165,7 @@ var SampleApp = function() {
 
             
 
-                 globalDB.collection(exchange).find().toArray( 
+                 globalDB.collection(exchange).find({'timestamp':{'$gt':0}}).toArray( 
                     function(err, data){
 
 
