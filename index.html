@@ -13,22 +13,33 @@
 		$(document).ready(function(){
 
 			
-			getData();
+			getAllData();
 			//makeChart();
 		})
 
 
-		
+		function getAllData(){
+
+			var exchanges = ['btcchina', 'bter'];
+
+			for(k in exchanges){
+
+				getData(btcchina)
+			}
+
+		}
 
 
 
 
-		function getData(){
+
+
+		function getData(exchange){
 
 			$.ajax({
 
-				url:'http://bitstamp-searchgag.rhcloud.com/getAllData',
-
+				url:'http://bitstamp-searchgag.rhcloud.com/getAllData?exchange='+exchange,
+				data: 
 				complete:function(transport){
 
 					var resp = transport.responseText;
@@ -37,38 +48,15 @@
 
 					//empty array we are going to make into something we can send to highcharts
 
-					highChartData=[];
+					chartData=[];
 
 					for(i in info){
 
-						var thisExchangeData = info[i];
-
-						thisExchangesArray=[];
-						for(j in thisExchangeData){
-
-							var newInfo = [info[i]['timestamp'],info[i]['price'];
-							thisExchangesArray.push(newInfo);
-
-						}
-
-						highChartData.push({'name': i, 'data':thisExchangesArray })
-						//chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
+						chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
 
 					}
 
-					/*
-					[{
-			            name: 'Bitstamp',
-
-			            data: data1
-
-			        }]
-					*/
-
-
-					console.log(highChartData);
-
-					makeChart(highChartData);
+					//makeChart(chartData);
 
 
 
@@ -113,7 +101,12 @@
 			                }
 			            }
 			        },
-			        series: data1
+			        series: [{
+			            name: 'Bitstamp',
+
+			            data: data1
+
+			        }]
 			    });
 		}
 

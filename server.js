@@ -239,7 +239,7 @@ var SampleApp = function() {
                if(i ==0){
 
                 baseCommand = 'rp("'+theUrl+'")';
-                addOnCommand = '.then(function(data){ tm =   var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})';
+                addOnCommand = '.then(function(data){  var timestamp = new Date().getTime(); data["timestamp"] = timestamp; saveData("'+collectn+'", data)})';
                }
 
                else{
