@@ -52,8 +52,9 @@
 					chartData=[];
 
 					for(i in info){
-
-						chartData[i]= [info[i]['timestamp'],info[i]['price'] ];
+						if(typeof chartData[i]['timestamp'] != "undefined"){
+							chartData[i]= [info[i]['timestamp'],info[i]['last'] ];
+						}
 
 					}
 
