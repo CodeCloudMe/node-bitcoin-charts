@@ -1,0 +1,1 @@
+wget --quiet -O - 'http://bitstamp-searchgag.rhcloud.com/getAllPrices';

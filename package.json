@@ -29,7 +29,8 @@
     "cheerio":"",
     "pusher":"",
     "pusher-client":"",
-    "mongodb":""
+    "mongodb":"",
+    "request-promise":""
   },
   "devDependencies": {},
   "bundleDependencies": [],

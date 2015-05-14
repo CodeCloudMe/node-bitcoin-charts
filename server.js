@@ -10,6 +10,7 @@ var fs      = require('fs');
 
 var pusher = require('pusher-client');
 var MongoClient = require('mongodb').MongoClient;
+var rp = require('request-promise');
 
 
 var connection_string = '127.0.0.1:27017/prices';
@@ -149,6 +150,79 @@ var SampleApp = function() {
                 });
            
         };
+
+
+
+
+
+        self.routes['/getAllPrices'] = function(req, res) {
+
+
+
+
+            var endPoints = [
+                    'http://data.bter.com/api/1/ticker/btc_usd', 
+                   'https://data.btcchina.com/data/ticker',
+                    'https://btc-e.com/api/3/ticker/btc_usd',
+                    'https://www.okcoin.com/api/ticker.do?ok=1',
+                    'https://api.bitfinex.com/v1/pubticker/BTCUSD',
+                    'https://www.bitstamp.net/api/ticker/'];
+
+
+
+
+            var saveData = function(collectionName, data){
+
+                console.log('saving into ' + collectionName + 'the followin \n \n '+data);
+
+                 globalDB.collection(collectionName).insert(data);
+
+
+                // globalDB.collection(database).insert( values ,
+            }
+
+            var allCollection = [];
+
+         
+            baseCommand = 'rp(theUrl)';
+            addonCommand ='';
+            for(i in endPoints ){
+
+
+                var theUrl = endPoints[i]; 
+               
+                var collectn = theUrl.replace(/((data\.)|(api\.))/, '').match(/((:\/\/[^ww])|(www\.))\w+/)[0].replace('://', '').replace('www.', '');
+
+              
+
+               // rp(theUrl).then(function(data){saveData})
+               if(i ==0){
+
+                baseCommand = 'rp("'+theUrl+'")';
+                addOnCommand = '.then(function(data){saveData("'+collectn+'", data)})';
+               }
+
+               else{
+                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){saveData("'+collectn+'", data)})})'
+               }
+
+                baseCommand = baseCommand + addOnCommand;
+            }
+
+            console.log(baseCommand);
+            eval(baseCommand);
+
+            res.send("success. Good job. Got data");
+
+           // rp(theUrl).then(function(data){saveData("bter", data)}).then(function(data){saveData("btc", data)}).then(function(data){saveData("okcoin", data)}).then(function(data){saveData("bitfinex", data)}).then(function(data){saveData("bitstamp", data)})
+
+           // eval(baseCommand);
+
+
+
+
+
+        }
 
 
 
