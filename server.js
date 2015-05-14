@@ -260,7 +260,7 @@ var SampleApp = function() {
 
 
             var endPoints = [
-                    'http://data.bter.com/api/1/ticker/btc_usd', 
+                    'http://data.bter.com/api/1/depth/btc_cny', 
                    'https://data.btcchina.com/data/ticker',
                     'https://btc-e.com/api/3/ticker/btc_usd',
                     'https://www.okcoin.com/api/ticker.do?ok=1',
