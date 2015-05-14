@@ -53,7 +53,9 @@
 
 					for(i in info){
 						if(typeof info[i]['timestamp'] != "undefined"){
-							chartData[i]= [info[i]['timestamp'],parseFloat(info[i]['last'] )];
+
+							theLast = parseFloat(info[i]['last'] )
+							chartData[i]= [info[i]['timestamp'],theLast];
 						}
 
 					}

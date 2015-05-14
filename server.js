@@ -182,6 +182,11 @@ var SampleApp = function() {
 
                            } 
 
+                           if(exchange =="btcchina"){
+                                data = data['ticker'];
+
+                           }
+
 
                              console.log(data);
                              console.log('finishing');
