@@ -169,8 +169,7 @@ var SampleApp = function() {
                     function(err, data){
 
 
-                           if(exchange == "bter" || exchange == "btcchina"){
-
+                           if(exchange == "bter"){
                                 
                                 for(i in data){
 
@@ -179,15 +178,22 @@ var SampleApp = function() {
 
 
 
-
                            } 
 
                            if(exchange =="btcchina"){
-                                data = data['ticker'];
+
+
+                                  for(i in data){
+
+                                    data[i]= data[i]['ticker'];
+                                }
 
                            }
                             if(exchange =="btc"){
-                                data = data['btc_usd'];
+                                 for(i in data){
+
+                                    data[i]= data[i]['btc_usd'];
+                                }
 
                            }
 
