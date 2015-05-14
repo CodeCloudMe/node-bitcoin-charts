@@ -184,8 +184,14 @@ var SampleApp = function() {
                            if(exchange == "bitstamp"){
                                 
                                 for(i in data){
+                                    if(!data[i]['bid']){
 
-                                    data[i]['buy']= data[i]['bid'];
+                                        data.splice(i, 1);
+                                    }
+                                    else{
+                                         data[i]['buy']= data[i]['bid'];
+                                    }
+                                   
                                 }
 
 
