@@ -366,7 +366,7 @@ var SampleApp = function() {
 
                         console.log(values);
                        
-                        globalDB.collection('bitstamp').insert( values ,function(err, records){
+                        globalDB.collection('bitstampSocket').insert( values ,function(err, records){
                                  if(err) { 
                                     console.log('write error: '+err);
                                 
