@@ -165,7 +165,7 @@ var SampleApp = function() {
 
             
 
-                 globalDB.collection(exchange).find.toArray( 
+                 globalDB.collection(exchange).find().toArray( 
                     function(err, data){
 
 
