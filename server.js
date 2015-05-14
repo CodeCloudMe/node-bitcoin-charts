@@ -186,6 +186,10 @@ var SampleApp = function() {
                                 data = data['ticker'];
 
                            }
+                            if(exchange =="btc"){
+                                data = data['btc_usd'];
+
+                           }
 
 
                              console.log(data);
