@@ -15,6 +15,15 @@ var rp = require('request-promise');
 var pusher2 = require('pusher');
 
 
+
+var pusherA = new pusher2({
+                              appId: '120712',
+                              key: '5707fad988e38a9c8ce1',
+                              secret: 'ae9595f75deace1274f1'
+                            });
+
+
+
 var connection_string = '127.0.0.1:27017/prices';
 // if OPENSHIFT env variables are present, use the available connection info:
 if( process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
@@ -321,15 +330,7 @@ var SampleApp = function() {
             console.log(baseCommand);
             eval(baseCommand);
 
-            thisTimeout = setTimeout(function(){
-
-
-                var pusherA = new pusher2({
-                              appId: '120712',
-                              key: '5707fad988e38a9c8ce1',
-                              secret: 'ae9595f75deace1274f1'
-                            });
-
+ 
 
 
                 pusherA.trigger('test_channel', 'my_event', {
@@ -338,8 +339,7 @@ var SampleApp = function() {
 
 
 
-            }, 5000);
-
+           
 
             res.send("success. Good job. Got data");
 
