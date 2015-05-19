@@ -211,6 +211,7 @@ var SampleApp = function() {
                                     }
                                     else{
                                          data[i]['buy']= data[i]['bid'];
+                                          data[i]['sell']= data[i]['ask'];
                                     }
                                    
                                 }
@@ -224,6 +225,7 @@ var SampleApp = function() {
                                 for(i in data){
 
                                     data[i]['buy']= data[i]['bid'];
+                                     data[i]['sell']= data[i]['ask'];
                                 }
 
 
