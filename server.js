@@ -321,7 +321,7 @@ var SampleApp = function() {
             console.log(baseCommand);
             eval(baseCommand);
 
-            thisTimeout = setTimeout(function(){
+           
 
 
                 var pusherA = new pusher2({
@@ -332,14 +332,14 @@ var SampleApp = function() {
 
 
 
+
                 pusherA.trigger('test_channel', 'my_event', {
                         "message": "hello world"
                 });
 
 
 
-            }, 5000);
-
+           
 
             res.send("success. Good job. Got data");
 

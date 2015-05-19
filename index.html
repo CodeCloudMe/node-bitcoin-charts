@@ -27,6 +27,30 @@
 		var currentExchange = 0;
 
 		
+		numRunInt = 0;
+
+		function subscribeToData2(){
+
+
+			cInt = setInterval(function(){
+
+				doNextExchange();
+				numRunInt= numRunInt+1;
+
+				if(numRunInt>10){
+
+					clearInterval(cInt);
+					
+					subscribeToData2();
+
+
+
+				}
+			}, 60000);
+
+
+
+		}
 
 
 		function subscribeToData(){
@@ -132,7 +156,8 @@
 
 			$('#container').highcharts({
 			        chart: {
-			            type: 'spline'
+			            type: 'spline',
+			            zoomType:'x'
 			        },
 			        title: {
 			            text: 'Exchange prices'
