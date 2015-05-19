@@ -12,9 +12,7 @@ var pusher = require('pusher-client');
 var MongoClient = require('mongodb').MongoClient;
 var rp = require('request-promise');
 
-var Pusher1 = require('pusher');
-
-
+var pusher2 = require('pusher');
 
 
 var connection_string = '127.0.0.1:27017/prices';
@@ -323,21 +321,27 @@ var SampleApp = function() {
             console.log(baseCommand);
             eval(baseCommand);
 
+            thisTimeout = setTimeout(function(){
+
+
+                var pusherA = new pusher2({
+                              appId: '120712',
+                              key: '5707fad988e38a9c8ce1',
+                              secret: 'ae9595f75deace1274f1'
+                            });
+
+
+
+                pusherA.trigger('test_channel', 'my_event', {
+                        "message": "hello world"
+                });
+
+
+
+            }, 5000);
+
+
             res.send("success. Good job. Got data");
-
-            setTimeout(function(){
-
-                var pusher1 = new Pusher1({
-                          appId: '120712',
-                          key: '5707fad988e38a9c8ce1',
-                          secret: 'ae9595f75deace1274f1'
-                        });
-
-                        pusher1.trigger('test_channel', 'my_event', {
-                          "message": "hello world"
-                        });
-            
-            }, 3000);
 
            // rp(theUrl).then(function(data){saveData("bter", data)}).then(function(data){saveData("btc", data)}).then(function(data){saveData("okcoin", data)}).then(function(data){saveData("bitfinex", data)}).then(function(data){saveData("bitstamp", data)})
 
