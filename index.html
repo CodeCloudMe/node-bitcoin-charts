@@ -102,6 +102,7 @@
 
 		function doNextExchange(){
 
+			console.log('doing next exhange '+exchanges[currentExchange]);
 
 			getData(exchanges[currentExchange], selectMetric, areDates);
 		}
@@ -128,7 +129,7 @@
 
 				url:'http://bitstamp-searchgag.rhcloud.com/getAllData',
 				
-				data:dataInfo
+				data:dataInfo,
 				
 				complete:function(transport){
 
