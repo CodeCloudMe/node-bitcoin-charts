@@ -16,7 +16,7 @@
 
 			doNextExchange();
 
-			subscribeToData();
+			subscribeToData2();
 
 			listenMetricChange();
 			//getAllData();
@@ -74,6 +74,7 @@
 
 					clearInterval(cInt);
 					
+					numRunInt=0;
 					subscribeToData2();
 
 
@@ -132,7 +133,7 @@
 				data:dataInfo,
 				
 
-				 
+
 				complete:function(transport){
 
 					var resp = transport.responseText;

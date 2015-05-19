@@ -13,6 +13,8 @@ var pusher = require('pusher-client');
 var MongoClient = require('mongodb').MongoClient;
 var rp = require('request-promise');
 
+
+/*
 var pusher2 = require('pusher');
 
 
@@ -23,7 +25,7 @@ var pusherA = new pusher2({
                               secret: 'ae9595f75deace1274f1'
                             });
 
-
+*/
 
 var connection_string = '127.0.0.1:27017/prices';
 // if OPENSHIFT env variables are present, use the available connection info:
