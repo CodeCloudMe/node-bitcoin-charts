@@ -17,6 +17,8 @@
 			doNextExchange();
 
 			subscribeToData();
+
+			listenMetricChange():
 			//getAllData();
 			//makeChart();
 		})
@@ -25,9 +27,28 @@
 		var allData=[];
 		var exchanges = ['bitfinex', 'btcchina', 'okcoin', 'bitstamp'];
 		var currentExchange = 0;
-
+		var selectMetric = "buy";
 		
 		numRunInt = 0;
+
+
+		function listenMetricChange(){
+
+			$('#selectStuff').on('change', function(){
+
+
+				var whichOne = $(this).val();
+
+				selectMetric =whichOne;
+
+				doNextExchange();
+
+
+
+			})
+		}
+
+
 
 		function subscribeToData2(){
 
@@ -42,6 +63,7 @@
 					clearInterval(cInt);
 					
 					subscribeToData2();
+
 
 
 
@@ -60,7 +82,7 @@
 		    	var channel = pusher.subscribe('test_channel');
 		    	channel.bind('my_event', function(data) {
 		      		
-		      		
+		      		console.log('getting new data');
 		      		doNextExchange();
 		    	});
 
@@ -68,13 +90,13 @@
 
 		function doNextExchange(){
 
-			getData(exchanges[currentExchange]);
+			getData(exchanges[currentExchange], selectMetric);
 		}
 
 
 
 
-		function getData(exchange){
+		function getData(exchange, whichMetric){
 
 			$.ajax({
 
@@ -94,7 +116,7 @@
 					for(i in info){
 						if(typeof info[i]['timestamp'] != "undefined"){
 
-							theLast = parseFloat(info[i]['buy'] )
+							theLast = parseFloat(info[i][whichMetric] )
 							if(exchange =="btcchina"){
 								theLast= theLast*.16;
 							}
@@ -111,6 +133,7 @@
 
 						makeChart(allData);
 						currentExchange=0;
+						allData=[];
 
 					}
 					else{
@@ -163,7 +186,7 @@
 			            text: 'Exchange prices'
 			        },
 			        subtitle: {
-			            text: 'Metric: buy'
+			            text: 'Metric: '+ selectMetric
 			        },
 			       
 			        xAxis: {
