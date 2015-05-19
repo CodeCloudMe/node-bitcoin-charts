@@ -28,9 +28,21 @@
 		var exchanges = ['bitfinex', 'btcchina', 'okcoin', 'bitstamp'];
 		var currentExchange = 0;
 		var selectMetric = "buy";
+		var areDates = false;
 		
 		numRunInt = 0;
 
+
+		function updateDates(){
+
+			areDates = true;
+			 date1 = new Date($('#date1').val()).getTime();
+			 date2 = new Date($('#date2').val()).getTime();
+
+			 doNextExchange();
+
+
+		}
 
 		function listenMetricChange(){
 
@@ -90,18 +102,33 @@
 
 		function doNextExchange(){
 
-			getData(exchanges[currentExchange], selectMetric);
+
+			getData(exchanges[currentExchange], selectMetric, areDates);
 		}
 
 
 
 
-		function getData(exchange, whichMetric){
+		function getData(exchange, whichMetric, areDates){
 
-			$.ajax({
+			dataInfo ={'exchange':exchange};
+
+
+			if(areDates !=false){
+
+				dataInfo ={'exchange':exchange,
+							'date1':date1,
+							'date2':date2}
+
+
+
+			}
+
+						$.ajax({
 
 				url:'http://bitstamp-searchgag.rhcloud.com/getAllData',
-				data: {'exchange':exchange},
+				
+				data:dataInfo
 				
 				complete:function(transport){
 
@@ -233,6 +260,12 @@
 
 			</select>
 
+			<br><br>
+
+		Start Date: <input type="date" id="date1">
+		End Date: <input type="date" name="date2">
+		<br>
+		<input type="button" onclick="updateDates()">
 		</div>
 
 	</body>

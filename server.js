@@ -168,16 +168,25 @@ var SampleApp = function() {
 
         self.routes['/getAllData'] = function(req, res){
 
+
+            var defaultQuery = {'$gt':0};
             if(!req.query.exchange){
                 res.send('{"status":"fail", "reason":"send exchange"}');
 
                 return false;
             }
+
+            if(req.query.date1  && req.query.date2){
+              defaultQuery = {'$gt':parseInt(req.query.date1), '$lt':parseInt(req.query.date2)};
+
+            }
+
+
            var  exchange = req.query.exchange;
 
             
 
-                 globalDB.collection(exchange).find({'timestamp':{'$gt':0}}).toArray( 
+                 globalDB.collection(exchange).find({'timestamp':defaultQuery}).toArray( 
                     function(err, data){
 
 
