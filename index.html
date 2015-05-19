@@ -6,6 +6,8 @@
 		<script src="http://code.highcharts.com/highcharts.js"></script>
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+		<script src="http://js.pusher.com/2.2/pusher.min.js"></script>
+
 
 		<script>
 
@@ -13,6 +15,8 @@
 		$(document).ready(function(){
 
 			doNextExchange();
+
+			subscribeToData();
 			//getAllData();
 			//makeChart();
 		})
@@ -25,6 +29,18 @@
 		
 
 
+		function subscribeToData(){
+
+
+				var pusher = new Pusher('5707fad988e38a9c8ce1');
+		    	var channel = pusher.subscribe('test_channel');
+		    	channel.bind('my_event', function(data) {
+		      		
+		      		
+		      		doNextExchange();
+		    	});
+
+		}
 
 		function doNextExchange(){
 
@@ -69,7 +85,8 @@
 					currentExchange= currentExchange+1;
 					if((currentExchange +1) > exchanges.length){
 
-						makeChart(allData)
+						makeChart(allData);
+						currentExchange=0;
 
 					}
 					else{
@@ -89,6 +106,30 @@
 		}
 
 		function makeChart(data1){
+
+			//show loading data indicator
+			$('#container').css({
+
+				'border-width':'2px',
+				'border-style':'solid',
+				'border-color':'blue'
+			});
+
+			//timeout for 2 seconds... to unshow loading indicator
+
+			setTimeout(function(){
+					$('#container').css({
+
+					'border-width':'2px',
+					'border-style':'solid',
+					'border-color':'white'
+					});
+
+
+			}, 2000);
+
+
+
 			$('#container').highcharts({
 			        chart: {
 			            type: 'spline'
