@@ -345,9 +345,11 @@ var SampleApp = function() {
  
 
 
-                pusherA.trigger('test_channel', 'my_event', {
+              /*  pusherA.trigger('test_channel', 'my_event', {
                         "message": "hello world"
                 });
+
+*/
 
 
 
