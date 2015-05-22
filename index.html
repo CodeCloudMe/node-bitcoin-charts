@@ -213,12 +213,16 @@
 		function updateChart(newData, oldData){
 
 
+			
+
+
 
 			for(i in oldData){
 
 				//for every single exchange
-				var numberEvents = oldData[i]['data'].length;
+				var numberEvents = newData[i]['data'].length;
 				console.log('number Events: '+ numberEvents);
+
 				var ourNewIndex = numberEvents-1;
 				console.log('new Event: '+ ourNewIndex);
 				var dataToUpdate = newData[i]['data'][ourNewIndex];
