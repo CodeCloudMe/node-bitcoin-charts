@@ -48,6 +48,12 @@ MongoClient.connect('mongodb://'+connection_string, function(err, db) {
 })
 
 
+//this is the variable that tells us if we are getting real-time or pushed data via a socket
+
+
+var theBitcoinSocket = null;
+
+
 
 /**
  *  Define the sample application.
@@ -281,7 +287,35 @@ var SampleApp = function() {
             
         }
 
+
+        self.routes['/pushedData'] = function(req, res){
+
+            io.on('connection', function (socket) {
+
+                theBitcoinSocket = socket;
+            }
+
+
+            res.send({"msg":"good job... sock is all yours on connection"});
+        }
+
+        
+
         self.routes['/getAllPrices'] = function(req, res) {
+
+
+
+
+
+            if(theBitcoinSocket==null){
+
+
+            }
+
+            else{
+
+                 theBitcoinSocket.emit('news', { hello: 'world' });
+            }
 
 
 
@@ -480,5 +514,12 @@ var SampleApp = function() {
 
 var zapp = new SampleApp();
 zapp.initialize();
+
+
+
+
 zapp.start();
+
+var io = require('socket.io')(zapp.app);
+
 

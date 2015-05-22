@@ -30,7 +30,8 @@
     "pusher":"",
     "pusher-client":"",
     "mongodb":"",
-    "request-promise":""
+    "request-promise":"",
+    "socket.io":""
   },
   "devDependencies": {},
   "bundleDependencies": [],
