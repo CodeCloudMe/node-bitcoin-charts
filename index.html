@@ -79,6 +79,10 @@
 
 			 var socket = io('http://bitstamp-searchgag.rhcloud.com/pushedData');
 
+			 socket.on('news', function (data) {
+   					 console.log(data);
+
+			}
 		}
 
 		function updateDates(){
@@ -87,7 +91,10 @@
 			 date1 = new Date($('#date1').val()).getTime();
 			 date2 = new Date($('#date2').val()).getTime();
 			 firstTime=true;
-			 doNextExchange();
+
+			 $('#loader').fadeIn();
+
+				 doNextExchange();
 
 
 		}
@@ -100,6 +107,8 @@
 				var whichOne = $(this).val();
 
 				selectMetric =whichOne;
+
+				firstTime = true;
 
 				doNextExchange();
 
