@@ -2,6 +2,33 @@
 
 
 	<head>
+
+		<style>
+
+			#loader{
+
+
+					position:absolute;
+					top:25%;
+					left:25%;
+					width:50%;
+					height:50%;
+					text-align:center;
+
+					font-color:blue;
+					font-size:20px;
+					z-index:1000;
+
+
+
+				
+			}
+		</style>
+
+
+
+
+
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="http://code.highcharts.com/highcharts.js"></script>
 		<script src="http://code.highcharts.com/modules/exporting.js"></script>
@@ -270,7 +297,7 @@
 						        		load:function(){
 
 						        			seriesUpdates =this.series;
-
+						        			$('#loader').fadeOut(4000);
 
 						        		}
 
@@ -340,6 +367,15 @@
 		<input type="button" onclick="updateDates()" value="update">
 		</div>
 
+
+		<div id="loader">
+			<img src="http://kcls.org/images/loaders/inspiroo_logo_loader_pop.gif">
+			<br><br>
+			Loading...
+
+
+
+		</div>
 	</body>
 
 </html>
