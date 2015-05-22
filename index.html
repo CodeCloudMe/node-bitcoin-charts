@@ -25,10 +25,23 @@
 
 
 		var allData=[];
+
+		var prevData=[];
+
 		var exchanges = ['bitfinex', 'btcchina', 'okcoin'];
 		var currentExchange = 0;
 		var selectMetric = "buy";
 		var areDates = false;
+
+		//first time we got data
+
+		var firstTime = true;
+
+
+		//for updateing series - this is the variable
+
+
+		var seriesUpdates = [];
 		
 		numRunInt = 0;
 
@@ -162,8 +175,21 @@
 					currentExchange= currentExchange+1;
 					if((currentExchange +1) > exchanges.length){
 
-						makeChart(allData);
+						if(firstTime==true){
+
+							makeChart(allData);
+
+						}
+
+						else{
+
+							updateChart(allData, prevData);
+						}
+						
+						firstTime = false;
 						currentExchange=0;
+
+						prevData = allData;
 						allData=[];
 
 					}
@@ -181,6 +207,29 @@
 				}
 
 			})
+		}
+
+
+		function updateChart(newData, oldData){
+
+
+
+			for(i in oldData){
+
+				//for every single exchange
+				var numberEvents = oldData[i]['data'].length;
+				console.log('number Events: '+ numberEvents);
+				var ourNewIndex = numberEvents-1;
+				console.log('new Event: '+ ourNewIndex);
+				var dataToUpdate = newData[i]['data'][ourNewIndex];
+				console.log('data to update: '+ dataToUpdate);
+				seriesUpdates[i].addPoint(dataToUpdate);
+
+
+
+
+
+				}
 		}
 
 		function makeChart(data1){
@@ -210,7 +259,22 @@
 
 			$('#container').highcharts({
 			        chart: {
-			            type: 'spline',
+
+
+			        	events:
+						        	{
+						        		load:function(){
+
+						        			seriesUpdates =this.series;
+
+
+						        		}
+
+
+						        	},
+
+
+			         	type: 'spline',
 			            zoomType:'x'
 			        },
 			        title: {
