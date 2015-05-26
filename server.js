@@ -182,17 +182,20 @@ var SampleApp = function() {
 
         if(!req.query.price || !req.query.volume){
 
-            res.send({'status':'fail', 'msg':'send volume'});
+            res.send('{"status":"fail", "reason":"volume"}');
         }
         else{
 
             var theInfo = req.query;
             theInfo['timestamp']= new Date().getTime();
 
+            console.log(theInfo);
+
+            res.send('{"status":"success", "reason":"data saved"}');
 
             saveData('btceWisdomExtension', theInfo);
 
-                res.send({'status':'success', 'msg':'data saved'})
+                
 
         }
     }
