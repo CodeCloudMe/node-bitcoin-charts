@@ -174,6 +174,69 @@ var SampleApp = function() {
 
 
 
+
+
+
+
+
+
+        //tradebook data collection
+
+
+        self.routes['/getTradeBookData']= function(req, res){
+
+
+            var apiURLs =[
+
+
+             {'collName':"bitstampOrderData", "url":"https://www.bitstamp.net/api/order_book/"},
+             {'collName':"btcChinaOrderData", "url":"https://data.btcchina.com/data/orderbook"}
+
+
+            ];
+
+
+
+             for(i in apiURLs ){
+
+
+                var theUrl = apiURLs[i]['url']; 
+               
+                var collectn =apiURLs[i]['collName'];
+              
+
+               // rp(theUrl).then(function(data){saveData})
+               if(i ==0){
+
+                baseCommand = 'rp("'+theUrl+'")';
+                addOnCommand = '.then(function(data){ saveData("'+collectn+'", data)})';
+               }
+
+               else{
+                    addOnCommand = '.then(function(){rp("'+theUrl+'").then(function(data){  saveData("'+collectn+'", data)})})'
+               }
+
+                baseCommand = baseCommand + addOnCommand;
+            }
+
+            console.log(baseCommand);
+            eval(baseCommand);
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
         self.routes['/getAllData'] = function(req, res){
 
 
@@ -326,32 +389,19 @@ var SampleApp = function() {
                     'https://btc-e.com/api/3/ticker/btc_usd',
                     'https://www.okcoin.com/api/ticker.do?ok=1',
                     'https://api.bitfinex.com/v1/pubticker/BTCUSD',
-                    'https://www.bitstamp.net/api/ticker/'];
+                    'https://www.bitstamp.net/api/ticker/',
+
+                    'https://cex.io/api/ticker/BTC/USD'];
 
 
 
 
-            var saveData = function(collectionName, data){
-
-
-                console.log('saving into ' + collectionName + 'the followin \n \n '+data);
-                 data = JSON.parse(data);
-
-                 var timestamp = new Date().getTime(); 
-                 data["timestamp"] = timestamp;
-
-
-                 globalDB.collection(collectionName).insert(data);
-
-
-                // globalDB.collection(database).insert( values ,
-            }
-
+           
             var allCollection = [];
 
          
-            baseCommand = 'rp(theUrl)';
-            addonCommand ='';
+           var baseCommand = 'rp(theUrl)';
+           var addonCommand ='';
             for(i in endPoints ){
 
 
@@ -522,4 +572,31 @@ zapp.start();
 
 var io = require('socket.io')(zapp.app);
 
+
+
+
+
+
+
+// functions 
+
+
+ var saveData = function(collectionName, data){
+
+
+                console.log('saving into ' + collectionName + 'the followin \n \n '+data);
+                 data = JSON.parse(data);
+
+                 var timestamp = new Date().getTime(); 
+                 data["timestamp"] = timestamp;
+
+
+                 globalDB.collection(collectionName).insert(data);
+
+
+                // globalDB.collection(database).insert( values ,
+            }
+
+
+            
 
