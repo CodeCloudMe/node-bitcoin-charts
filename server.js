@@ -180,6 +180,11 @@ var SampleApp = function() {
 
     self.routes['/btceWisdom'] = function(req, res){
 
+        res.send('{"status":"testing", "reason":"testing"}');
+        return;
+
+        //rest proceeds after testing..
+        
         if(!req.query.price || !req.query.volume){
 
             res.send('{"status":"fail", "reason":"volume"}');
