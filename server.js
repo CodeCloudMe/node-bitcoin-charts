@@ -175,6 +175,28 @@ var SampleApp = function() {
 
 
 
+    //save information from chrome extension
+
+
+    self.routes['/btceWisdom'] = function(req, res){
+
+        if(!req.query.price || !req.query.volume){
+
+            res.send({'status':'fail', 'msg':'send volume'});
+        }
+        else{
+
+            var theInfo = req.query;
+            theInfo['timestamp']= new Date().getTime();
+
+
+            saveData('btceWisdomExtension', theInfo);
+
+                res.send({'status':'success', 'msg':'data saved'})
+
+        }
+    }
+
 
 
 
