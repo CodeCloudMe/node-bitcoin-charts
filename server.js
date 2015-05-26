@@ -184,7 +184,7 @@ var SampleApp = function() {
         return;
 
         //rest proceeds after testing..
-        
+
         if(!req.query.price || !req.query.volume){
 
             res.send('{"status":"fail", "reason":"volume"}');
@@ -419,9 +419,9 @@ var SampleApp = function() {
                     'https://btc-e.com/api/3/ticker/btc_usd',
                     'https://www.okcoin.com/api/ticker.do?ok=1',
                     'https://api.bitfinex.com/v1/pubticker/BTCUSD',
-                    'https://www.bitstamp.net/api/ticker/',
+                    'https://www.bitstamp.net/api/ticker/'
 
-                    'https://cex.io/api/ticker/BTC/USD'];
+                    //,'https://cex.io/api/ticker/BTC/USD'];
 
 
 
