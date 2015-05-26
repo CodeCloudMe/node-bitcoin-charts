@@ -422,7 +422,8 @@ var SampleApp = function() {
                     'https://api.bitfinex.com/v1/pubticker/BTCUSD',
                     'https://www.bitstamp.net/api/ticker/'
 
-                    //,'https://cex.io/api/ticker/BTC/USD'];
+                    //,'https://cex.io/api/ticker/BTC/USD'
+                    ];
 
 
 
