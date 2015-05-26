@@ -356,7 +356,7 @@ var SampleApp = function() {
             io.on('connection', function (socket) {
 
                 theBitcoinSocket = socket;
-            }
+            });
 
 
             res.send({"msg":"good job... sock is all yours on connection"});
@@ -598,5 +598,5 @@ var io = require('socket.io')(zapp.app);
             }
 
 
-            
+
 
