@@ -400,6 +400,7 @@ var SampleApp = function() {
 
 
 
+
             if(theBitcoinSocket==null){
 
 
