@@ -570,7 +570,7 @@ zapp.initialize();
 
 zapp.start();
 
-var io = require('socket.io')(zapp.app);
+//var io = require('socket.io')(zapp.app);
 
 
 
