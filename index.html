@@ -217,6 +217,10 @@
 
 								//push just the series data without date to correlation array, so we can analyze.
 
+								if(typeof justSeries[currentExchange] == "undefined"){
+									justSeries[currentExchange]=[];
+								}
+
 								justSeries[currentExchange].push(theLast);
 
 							if(exchange =="btcchina"){
