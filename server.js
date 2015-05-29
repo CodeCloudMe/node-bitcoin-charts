@@ -9,7 +9,7 @@
 var express = require('express');
 var fs      = require('fs');
 
-var pusher = require('pusher-client');
+//var pusher = require('pusher-client');
 var MongoClient = require('mongodb').MongoClient;
 var rp = require('request-promise');
 
