@@ -253,6 +253,7 @@ var SampleApp = function() {
             eval(baseCommand);
 
 
+            refreshDB();        
 
 
 
@@ -460,9 +461,9 @@ var SampleApp = function() {
             console.log(baseCommand);
             eval(baseCommand);
 
- 
+            //refresh db connection 
 
-
+                refreshDB();
               /*  pusherA.trigger('test_channel', 'my_event', {
                         "message": "hello world"
                 });
@@ -631,4 +632,19 @@ zapp.start();
 
 
 
+var refreshDB = function(){
+       setTimeout(function(){
+                globalDB.close();
 
+
+
+                MongoClient.connect('mongodb://'+connection_string, function(err, db) {
+
+                   
+                    globalDB=db;
+                    
+
+                })
+            }, 15000);
+
+}
